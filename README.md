@@ -144,14 +144,20 @@ this.scene.start('GameOverScene');
 
 ---
 
-## 🛠 Panduan Menggunakan Constants (Variabel Global Konstan)
+## 🛠 Panduan Menggunakan Globals (Variabel Global)
 
-Template ini menyediakan file **`src/utils/constants.js`** yang berguna untuk menyimpan variabel yang bersifat global dan tidak akan berubah ukurannya (misalnya resolusi dasar ukuran layar).
+Template ini menyediakan file khusus **`src/utils/globals.js`** yang sangat berguna untuk menyimpan variabel status permainan Anda secara keseluruhan (seperti Skor, Nyawa, Level saat ini, serta konstanta Resolusi).
 
-**Cara Menggunakan:**
+Karena antar Scene di Phaser tidak saling berbagi variabel secara otomatis, *Globals* sangat praktis digunakan untuk mentransfer skor dari `GameScene` agar bisa dibaca di `GameOverScene`.
+
+**Cara Menggunakannya di dalam Scene:**
 ```javascript
-import { CONSTANTS } from '../utils/constants';
+// 1. Import globals
+import { GLOBALS } from '../utils/globals';
 
-// Menempatkan objek secara dinamis mengikuti konstanta lebar layar (WIDTH)
-this.add.text(CONSTANTS.WIDTH / 2, 50, 'Hello', {}).setOrigin(0.5);
+// 2. Membaca nilai dari globals
+this.add.text(10, 10, 'Skor saat ini: ' + GLOBALS.score);
+
+// 3. Mengubah nilai globals (misal saat musuh mati)
+GLOBALS.score += 100;
 ```
